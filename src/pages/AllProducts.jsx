@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SingleProductCardDashboard from "../components/dashboard/SingleProductCardDashboard";
+import { ToastContainer } from "react-toastify";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -16,8 +17,9 @@ const AllProducts = () => {
 
   return (
     <div>
+      <ToastContainer />
       <h1 className="text-5xl font-bold text-center">All Produts</h1>
-      <div className="my-16 flex flex-wrap gap-4">
+      <div className="my-16 grid lg:grid-cols-3 gap-4">
         {products.map((shoe) => (
           <SingleProductCardDashboard
             key={shoe.id}

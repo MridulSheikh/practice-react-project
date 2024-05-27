@@ -1,8 +1,11 @@
+import { useRef } from "react";
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const EditProducts = () => {
   const shoe = useLoaderData();
+  const toastId = useRef(null);
 
   const [title, setTitle] = useState(shoe.title);
   const [price, setPrice] = useState(shoe.price);
@@ -13,7 +16,7 @@ const EditProducts = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    toastId.current = toast.loading("please wait");
     const form = e.target;
     const id = form.id.value;
     const title = form.title.value;
@@ -32,11 +35,17 @@ const EditProducts = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data.title) {
+          toast.dismiss(toastId.current);
+          toast.success("Successfully update Item!");
+        }
+      });
   };
 
   return (
     <div>
+      <ToastContainer />
       <h1 className="text-5xl font-bold text-center">Edit Product</h1>
 
       <div className="my-16">

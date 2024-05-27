@@ -1,5 +1,10 @@
+import { useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
 const AddProducts = () => {
+  const toastId = useRef(null);
   const handleSubmit = async (e) => {
+    toastId.current = toast.loading("please wait");
     e.preventDefault();
 
     const form = e.target;
@@ -21,13 +26,17 @@ const AddProducts = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.title) {
+          toast.dismiss(toastId.current);
+          toast.success("Successfully Post Item!");
+        }
         form.reset();
       });
   };
 
   return (
     <div>
+      <ToastContainer />
       <h1 className="text-5xl font-bold text-center">Add a Product</h1>
 
       <div className="my-16">
