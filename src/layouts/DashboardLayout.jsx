@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 const DashboardLayout = () => {
   return (
     <div className="grid grid-cols-12">
-      <div className="col-span-2 bg-[#1c2434] text-white min-h-screen py-10">
+      <div className="col-span-2 bg-[#1c2434] text-white min-h-screen py-10 h-screen">
         <ul>
           <li className=" p-4 text w-full  hover:bg-slate-700">
             <Link to={"home"}>Dashboard</Link>
@@ -20,7 +20,7 @@ const DashboardLayout = () => {
           </li>
         </ul>
       </div>
-      <div className="col-span-10 p-20">
+      <div className="col-span-10 p-20 h-screen overflow-y-scroll">
         <Outlet />
       </div>
     </div>
